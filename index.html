@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You Baby 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Satisfy&family=Great+Vibes&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-start: #ff9a9e;
+            --bg-end: #fecfef;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* GLOSSY OVERLAY */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        /* FLOATING ELEMENTS */
+        .floating-elements {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .float-item {
+            position: absolute;
+            animation: floatUpContinuous 15s infinite linear;
+            opacity: 0;
+        }
+        @keyframes floatUpContinuous {
+            0% { 
+                transform: translateY(110vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            5% { opacity: 0.85; }
+            95% { opacity: 0.85; }
+            100% { 
+                transform: translateY(-150px) rotate(720deg) scale(1.1);
+                opacity: 0;
+            }
+        }
+        
+        .bancylee-text {
+            font-family: 'Satisfy', cursive;
+            font-weight: 400;
+            color: #ff1493;
+            text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493;
+        }
+        .flower {
+            filter: drop-shadow(0 3px 8px rgba(0,0,0,0.3));
+        }
+        .gif-float {
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        /* SIZE VARIATIONS */
+        .size-small { font-size: 24px !important; }
+        .size-medium { font-size: 38px !important; }
+        .size-large { font-size: 52px !important; }
+        .gif-small { width: 50px !important; height: 50px !important; }
+        .gif-medium { width: 75px !important; height: 75px !important; }
+        .gif-large { width: 105px !important; height: 105px !important; }
+        
+        /* KISSING EMOJI EXPLOSION */
+        .kiss-emoji {
+            position: fixed;
+            font-size: 50px;
+            pointer-events: none;
+            z-index: 150;
+            animation: kissExplosion 2s ease-out forwards;
+        }
+        @keyframes kissExplosion {
+            0% { 
+                transform: translate(0, 0) scale(0.2);
+                opacity: 1;
+            }
+            100% { 
+                transform: translate(var(--kx), var(--ky)) scale(1.3) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+        
+        /* TITLE - BETTER FONT */
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5em;
+            font-weight: 400;
+            color: #fff;
+            text-shadow: 
+                0 0 40px #ff1493,
+                0 0 60px #ff69b4,
+                0 8px 30px rgba(0,0,0,0.9),
+                4px 4px 0 #ff1493,
+                -4px -4px 0 #ff69b4;
+            margin-bottom: 20px;
+            animation: megaGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes megaGlow {
+            from { filter: drop-shadow(0 0 30px #ff69b4); }
+            to { filter: drop-shadow(0 0 60px #ff1493); }
+        }
+        
+        /* QUESTION GIF */
+        .question-gif {
+            width: 240px;
+            height: auto;
+            margin: 0 auto 25px;
+            border-radius: 22px;
+            box-shadow: 0 20px 50px rgba(255,107,157,0.7);
+            animation: gifPulse 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 18px rgba(255,255,255,0.5));
+        }
+        @keyframes gifPulse {
+            0%, 100% { transform: scale(1) rotate(-2deg); }
+            50% { transform: scale(1.06) rotate(2deg); }
+        }
+        
+        .question-section {
+            animation: slideIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        h2 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 30px;
+            text-shadow: 
+                0 0 25px #ff1493,
+                0 6px 20px rgba(0,0,0,0.9),
+                3px 3px 0 #ff1493,
+                -3px -3px 0 #ff69b4;
+            font-weight: 700;
+        }
+        
+        /* FLOWER BUTTONS */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .flower-btn {
+            width: 120px;
+            height: 120px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            background: transparent;
+            transition: all 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.5));
+        }
+        
+        .flower-btn::before {
+            content: '🌺';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 110px;
+            transition: all 0.3s;
+        }
+        
+        .flower-btn-text {
+            position: relative;
+            z-index: 2;
+            font-size: 1.2em;
+            font-weight: 900;
+            color: #2b133b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(255,255,255,0.8);
+        }
+        
+        .yes-flower:nth-child(1)::before { content: '🌺'; }
+        .yes-flower:nth-child(2)::before { content: '🌸'; }
+        
+        /* BUTTERFLY BUTTON */
+        .butterfly-btn::before { content: '🦋'; }
+        
+        .yes-flower:hover, .butterfly-btn:hover {
+            transform: scale(1.35) rotate(15deg) !important;
+            filter: drop-shadow(0 25px 60px rgba(255,107,157,0.9));
+        }
+        
+        /* NO FLOWER TOP RIGHT */
+        .no-flower {
+            width: 90px;
+            height: 90px;
+            position: fixed;
+            top: 15px;
+            right: 20px;
+        }
+        .no-flower::before { content: '🌼'; font-size: 85px; }
+        .no-flower .flower-btn-text {
+            font-size: 1em;
+            color: #3a1c0b;
+        }
+        
+        /* CHOICE BUTTONS */
+        .choice-btn {
+            padding: 18px 35px;
+            font-size: 1.3em;
+            font-weight: 800;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            margin: 12px;
+            background: linear-gradient(135deg, #ff6b9d, #ff8fab);
+            color: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: all 0.3s;
+        }
+        .choice-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 20px 45px rgba(255,107,157,0.7);
+        }
+        
+        /* LOVE COUNTER */
+        .love-counter {
+            font-size: 3em;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 30px #ff1493, 0 5px 20px rgba(0,0,0,0.8);
+            margin: 25px 0;
+        }
+        
+        /* MESSAGE */
+        .message-text {
+            font-size: 1.6em;
+            line-height: 1.6;
+            color: #fff;
+            font-weight: 700;
+            text-shadow: 0 0 20px #ff1493, 0 4px 18px rgba(0,0,0,0.9);
+            margin: 25px 0;
+        }
+        
+        /* LOVE LETTER */
+        .love-letter {
+            font-size: 1.3em;
+            line-height: 1.9;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: 0 3px 15px rgba(0,0,0,0.8);
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        /* MYSTERY BOXES */
+        .mystery-box {
+            width: 140px;
+            height: 140px;
+            margin: 15px;
+            cursor: pointer;
+            border-radius: 15px;
+            transition: all 0.3s;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255,107,157,0.4), rgba(255,139,171,0.4));
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            border: 3px solid rgba(255,255,255,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .mystery-box::before {
+            content: '?';
+            font-size: 80px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.8);
+        }
+        .mystery-box:hover {
+            transform: scale(1.12) rotate(3deg);
+            box-shadow: 0 20px 50px rgba(255,107,157,0.7);
+        }
+        .mystery-box.selected {
+            border: 5px solid #FFD700;
+            box-shadow: 0 0 40px rgba(255,215,0,0.8);
+            transform: scale(1.1);
+        }
+        
+        /* REVEALED BOX CONTENT */
+        .mystery-box.revealed {
+            cursor: default;
+            background: rgba(255,255,255,0.3);
+        }
+        .mystery-box.revealed::before {
+            content: '';
+        }
+        .mystery-box.revealed:hover {
+            transform: scale(1);
+        }
+        .box-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+        }
+        .mystery-box.revealed .box-content {
+            display: flex;
+        }
+        .box-label {
+            font-size: 0.22em;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+            margin-top: 5px;
+        }
+        
+        /* CONFIRMATION SECTION */
+        .confirmation-section {
+            margin: 30px 0;
+        }
+        
+        /* NECKLACE REVEAL */
+        .necklace-reveal {
+            animation: revealBounce 1s ease-out;
+            margin: 30px 0;
+            font-size: 150px;
+        }
+        @keyframes revealBounce {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            60% { transform: scale(1.2) rotate(10deg); }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+        
+        .hidden { display: none !important; }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 3.5em; }
+            h2 { font-size: 1.6em; }
+            .question-gif { width: 200px; }
+            .choice-btn { padding: 15px 28px; font-size: 1.1em; }
+            .mystery-box { width: 110px; height: 110px; margin: 10px; }
+            .love-letter { font-size: 1.1em; padding: 20px; }
+            .box-content { font-size: 55px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements" id="floats"></div>
+    
+    <div class="container">
+        <h1>For You Baby 💕</h1>
+
+        <!-- Q1: VALENTINE -->
+        <div class="question-section" id="q1">
+            <img src="https://i.pinimg.com/originals/43/dd/6d/43dd6da864b13b5e68da57fa8e151eb8.gif" class="question-gif">
+            <h2>Babe... will you be my Valentine? 🥰</h2>
+            <div class="button-group">
+                <button class="flower-btn yes-flower" onclick="yesValentine()">
+                    <span class="flower-btn-text">YES!</span>
+                </button>
+                <button class="flower-btn yes-flower" onclick="yesValentine()">
+                    <span class="flower-btn-text">YES!</span>
+                </button>
+            </div>
+            <button class="flower-btn no-flower" id="no1" ontouchstart="noReappear(this,event)" onmouseenter="noReappear(this,event)">
+                <span class="flower-btn-text">No</span>
+            </button>
+        </div>
+
+        <!-- Q2: HURRAY (AUTO TRANSITION) -->
+        <div class="question-section hidden" id="q2">
+            <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" class="question-gif">
+            <h2>🎉 HURRAY! 🎉</h2>
+            <p class="message-text">You said YES baby! 😍💖</p>
+        </div>
+
+        <!-- Q3: WHAT DO YOU WANT -->
+        <div class="question-section hidden" id="q3">
+            <img src="https://media.tenor.com/RBa37_6ApVcAAAAi/cute-adorable.gif" class="question-gif">
+            <h2>What do you want baby? 💝</h2>
+            <button class="choice-btn" onclick="nextStep(4)">😘 Kisses</button>
+            <button class="choice-btn" onclick="nextStep(4)">🤗 Cuddles</button>
+            <button class="choice-btn" id="giftBtn" onclick="clickGift()">🎁 A Gift</button>
+        </div>
+
+        <!-- Q4: HOW MUCH DO YOU LOVE ME -->
+        <div class="question-section hidden" id="q4">
+            <img src="https://media1.tenor.com/m/Fy9zovre5VAAAAAC/bubu-dudu-kisses.gif" class="question-gif">
+            <h2>How much do you love me? 🥰</h2>
+            <div class="love-counter" id="loveCounter">100</div>
+            <button class="choice-btn" onclick="increaseLove(100)">100 Times 💕</button>
+            <button class="choice-btn" onclick="increaseLove(200)">200 Times 💖</button>
+            <button class="choice-btn" onclick="increaseLove(1000)">1000 Times 💘</button>
+        </div>
+
+        <!-- Q5: I LOVE YOU MESSAGE -->
+        <div class="question-section hidden" id="q5">
+            <img src="https://gifdb.com/images/high/milk-and-mocha-love-me-rg6ve4g0z8mip842.gif" class="question-gif">
+            <h2 style="font-size: 2.5em;">💖</h2>
+            <p class="message-text">I really love you baby<br>and I miss you sooo much! 😘💕</p>
+            <button class="choice-btn" onclick="nextStep(6)">I miss you too! 💗</button>
+        </div>
+
+        <!-- Q6: MYSTERY BOXES WITH CONFIRMATION -->
+        <div class="question-section hidden" id="q6">
+            <img src="https://media.tenor.com/KDqnVi_7tZoAAAAj/panda-love.gif" class="question-gif">
+            <h2>Choose a mystery box! 🎁</h2>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+                <div class="mystery-box" onclick="selectBox(0)" id="box0">
+                    <div class="box-content">
+                        <span id="emoji0">🌹</span>
+                        <span class="box-label" id="label0">Flowers</span>
+                    </div>
+                </div>
+                <div class="mystery-box" onclick="selectBox(1)" id="box1">
+                    <div class="box-content">
+                        <span id="emoji1">🍫</span>
+                        <span class="box-label" id="label1">Chocolate</span>
+                    </div>
+                </div>
+                <div class="mystery-box" onclick="selectBox(2)" id="box2">
+                    <div class="box-content">
+                        <span id="emoji2">📿</span>
+                        <span class="box-label" id="label2">Necklace</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="confirmation-section hidden" id="confirmSection">
+                <h2 style="font-size: 1.6em; margin-top: 30px;">Are you sure this is what you want? 🤔</h2>
+                <button class="choice-btn" onclick="revealGift()">Yes, I'm sure! 💖</button>
+            </div>
+            
+            <div class="confirmation-section hidden" id="missedSection">
+                <h2 style="font-size: 1.5em; margin-top: 30px;">What you missed:</h2>
+                
+                <button class="flower-btn yes-flower" onclick="nextStep(7)" style="margin-top: 30px;">
+                    <span class="flower-btn-text">NEXT</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Q7: NECKLACE REVEAL -->
+        <div class="question-section hidden" id="q7">
+            <div class="necklace-reveal">📿✨</div>
+            <h2>It's a necklace! 💎</h2>
+            <p class="message-text">Do you like it baby? 💕</p>
+            <button class="flower-btn butterfly-btn" onclick="likeNecklace()">
+                <span class="flower-btn-text">YES!</span>
+            </button>
+        </div>
+
+        <!-- Q8: ICE CREAM DATE -->
+        <div class="question-section hidden" id="q8">
+            <img src="https://i.pinimg.com/originals/06/d6/3f/06d63fd2ab4b47135971b0b11f6bccf8.gif" class="question-gif">
+            <h2>Do you want an ice cream date with me? 🍦💕</h2>
+            <div class="button-group">
+                <button class="flower-btn yes-flower" onclick="finalStep()">
+                    <span class="flower-btn-text">YES!</span>
+                </button>
+                <button class="flower-btn yes-flower" onclick="finalStep()">
+                    <span class="flower-btn-text">YES!</span>
+                </button>
+            </div>
+            <button class="flower-btn no-flower" id="no8" ontouchstart="noReappear(this,event)" onmouseenter="noReappear(this,event)">
+                <span class="flower-btn-text">No</span>
+            </button>
+        </div>
+
+        <!-- FINAL: LOVE LETTER -->
+        <div class="question-section hidden" id="final">
+            <img src="https://media1.tenor.com/m/53jaNOrVEhgAAAAC/woah-surprised.gif" class="question-gif">
+            <h2 style="font-size: 3em;">I LOVE YOU BABY! 💍</h2>
+            <div class="love-letter">
+                Every moment with you feels like a dream I never want to wake up from. You are the smile that makes my heart skip a beat, and the love that completes my soul.<br><br>
+                I cherish every laugh we share, every conversation we have, and every memory we create together. You make me want to be a better person, and loving you is the easiest and most beautiful thing I've ever done.<br><br>
+                I promise to hold your hand through every adventure, to wipe away your tears, to celebrate your victories, and to love you more with each passing day.<br><br>
+                You are my forever, my always, my everything.<br><br>
+                I love you more than words could ever express. 💖💕✨
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const GIFS = [
+            'https://media1.tenor.com/m/Fy9zovre5VAAAAAC/bubu-dudu-kisses.gif',
+            'https://media.tenor.com/KDqnVi_7tZoAAAAj/panda-love.gif',
+            'https://i.pinimg.com/originals/06/d6/3f/06d63fd2ab4b47135971b0b11f6bccf8.gif',
+            'https://media1.tenor.com/m/53jaNOrVEhgAAAAC/woah-surprised.gif'
+        ];
+        
+        const FLOWERS = ['🌸','🌺','🌹','🌷','🌻','💐','🏵️','🌼','💝','💖','🌿','🍀','🥀'];
+        
+        let loveCount = 100;
+        let giftMoveCount = 0;
+        let selectedBox = -1;
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            addFloatingStuff();
+        });
+        
+        // FLOATING BACKGROUND
+        function addFloatingStuff() {
+            const container = document.getElementById('floats');
+            const sizes = ['size-small', 'size-medium', 'size-large'];
+            const gifSizes = ['gif-small', 'gif-medium', 'gif-large'];
+            
+            for(let i = 0; i < 15; i++) {
+                const text = document.createElement('div');
+                text.className = 'float-item bancylee-text ' + sizes[Math.floor(Math.random() * sizes.length)];
+                text.textContent = 'Bancylee';
+                text.style.left = `${Math.random() * 95}%`;
+                text.style.animationDelay = `${-Math.random() * 15}s`;
+                text.style.animationDuration = `${12 + Math.random() * 8}s`;
+                container.appendChild(text);
+            }
+            
+            for(let i = 0; i < 25; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'float-item flower ' + sizes[Math.floor(Math.random() * sizes.length)];
+                flower.textContent = FLOWERS[Math.floor(Math.random() * FLOWERS.length)];
+                flower.style.left = `${Math.random() * 95}%`;
+                flower.style.animationDelay = `${-Math.random() * 15}s`;
+                flower.style.animationDuration = `${10 + Math.random() * 8}s`;
+                container.appendChild(flower);
+            }
+            
+            for(let i = 0; i < 12; i++) {
+                const img = document.createElement('img');
+                img.src = GIFS[Math.floor(Math.random() * GIFS.length)];
+                img.className = 'float-item gif-float ' + gifSizes[Math.floor(Math.random() * gifSizes.length)];
+                img.style.left = `${Math.random() * 90}%`;
+                img.style.animationDelay = `${-Math.random() * 15}s`;
+                img.style.animationDuration = `${13 + Math.random() * 10}s`;
+                container.appendChild(img);
+            }
+        }
+        
+        // KISSING EMOJI EXPLOSION
+        function kissExplosion() {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const kissEmojis = ['😘','💋','😚','💏','😻','💕'];
+            
+            const count = 50;
+            for(let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const kiss = document.createElement('div');
+                    kiss.className = 'kiss-emoji';
+                    kiss.textContent = kissEmojis[Math.floor(Math.random() * kissEmojis.length)];
+                    
+                    const angle = (Math.random() * 360) * (Math.PI / 180);
+                    const distance = 250 + Math.random() * 400;
+                    const kx = Math.cos(angle) * distance;
+                    const ky = Math.sin(angle) * distance;
+                    
+                    kiss.style.left = centerX + 'px';
+                    kiss.style.top = centerY + 'px';
+                    kiss.style.setProperty('--kx', kx + 'px');
+                    kiss.style.setProperty('--ky', ky + 'px');
+                    
+                    document.body.appendChild(kiss);
+                    setTimeout(() => kiss.remove(), 2000);
+                }, i * 15);
+            }
+        }
+        
+        // STEP NAVIGATION
+        function nextStep(step) {
+            document.querySelectorAll('.question-section').forEach(q => q.classList.add('hidden'));
+            document.getElementById('q' + step).classList.remove('hidden');
+        }
+        
+        // Q1: YES VALENTINE
+        function yesValentine() {
+            kissExplosion();
+            nextStep(2);
+            setTimeout(() => nextStep(3), 2000);
+        }
+        
+        // Q3: GIFT BUTTON - MOVES 3 TIMES THEN CLICKABLE
+        function clickGift() {
+            const btn = document.getElementById('giftBtn');
+            
+            if(giftMoveCount < 3) {
+                giftMoveCount++;
+                const rect = btn.getBoundingClientRect();
+                const maxX = window.innerWidth - rect.width - 40;
+                const maxY = window.innerHeight - rect.height - 40;
+                const x = Math.random() * maxX + 20;
+                const y = Math.random() * maxY + 20;
+                
+                btn.style.position = 'fixed';
+                btn.style.left = x + 'px';
+                btn.style.top = y + 'px';
+                btn.style.zIndex = '1000';
+                btn.style.transform = 'scale(1.15) rotate(25deg)';
+                
+                setTimeout(() => btn.style.transform = 'scale(1)', 300);
+            } else {
+                nextStep(6);
+            }
+        }
+        
+        // Q4: INCREASE LOVE (AUTO ADVANCE AT 2000+)
+        function increaseLove(amount) {
+            loveCount += amount;
+            document.getElementById('loveCounter').textContent = loveCount.toLocaleString();
+            kissExplosion();
+            
+            if(loveCount >= 2000) {
+                setTimeout(() => nextStep(5), 1500);
+            }
+        }
+        
+        // Q6: SELECT BOX - SELECTED BOX IS ALWAYS NECKLACE
+        function selectBox(index) {
+            if(selectedBox !== -1) return; // Already selected
+            
+            // Select box
+            selectedBox = index;
+            document.getElementById('box' + index).classList.add('selected');
+            
+            // Disable clicking other boxes
+            document.querySelectorAll('.mystery-box').forEach(box => {
+                box.style.pointerEvents = 'none';
+            });
+            
+            // Show confirmation
+            document.getElementById('confirmSection').classList.remove('hidden');
+        }
+        
+        // Q6: REVEAL GIFT - SELECTED BOX BECOMES NECKLACE, OTHERS ARE FLOWERS & CHOCOLATE
+        function revealGift() {
+            kissExplosion();
+            
+            // Hide confirmation
+            document.getElementById('confirmSection').classList.add('hidden');
+            
+            // The selected box becomes necklace
+            document.getElementById('box' + selectedBox).classList.add('revealed');
+            document.getElementById('emoji' + selectedBox).textContent = '📿';
+            document.getElementById('label' + selectedBox).textContent = 'Necklace';
+            
+            // The other two boxes become flowers and chocolate
+            const otherBoxes = [0, 1, 2].filter(i => i !== selectedBox);
+            
+            // First other box = flowers
+            document.getElementById('box' + otherBoxes[0]).classList.add('revealed');
+            document.getElementById('emoji' + otherBoxes[0]).textContent = '🌹';
+            document.getElementById('label' + otherBoxes[0]).textContent = 'Flowers';
+            
+            // Second other box = chocolate
+            document.getElementById('box' + otherBoxes[1]).classList.add('revealed');
+            document.getElementById('emoji' + otherBoxes[1]).textContent = '🍫';
+            document.getElementById('label' + otherBoxes[1]).textContent = 'Chocolate';
+            
+            // Show "What you missed" section
+            document.getElementById('missedSection').classList.remove('hidden');
+        }
+        
+        // Q7: LIKE NECKLACE
+        function likeNecklace() {
+            kissExplosion();
+            setTimeout(() => nextStep(8), 800);
+        }
+        
+        // Q8: FINAL
+        function finalStep() {
+            kissExplosion();
+            setTimeout(() => {
+                document.querySelectorAll('.question-section').forEach(q => q.classList.add('hidden'));
+                document.getElementById('final').classList.remove('hidden');
+            }, 800);
+        }
+        
+        // NO BUTTON REAPPEARS RANDOMLY
+        function noReappear(btn, event) {
+            if(event) event.preventDefault();
+            
+            const rect = btn.getBoundingClientRect();
+            const maxX = window.innerWidth - rect.width - 40;
+            const maxY = window.innerHeight - rect.height - 40;
+            const x = Math.random() * maxX + 20;
+            const y = Math.random() * maxY + 20;
+            
+            btn.style.opacity = '0';
+            btn.style.transition = 'opacity 0.2s';
+            
+            setTimeout(() => {
+                btn.style.left = x + 'px';
+                btn.style.top = y + 'px';
+                btn.style.opacity = '1';
+                btn.style.transform = 'scale(1.2) rotate(15deg)';
+                
+                setTimeout(() => btn.style.transform = 'scale(1)', 300);
+            }, 200);
+        }
+    </script>
+</body>
+</html>
