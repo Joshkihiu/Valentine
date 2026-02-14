@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>For You Baby 💕</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Satisfy&family=Great+Vibes&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -10,12 +12,42 @@
             --bg-start: #ff9a9e;
             --bg-end: #fecfef;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        /* HIDE ALL SCROLLBARS */
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: fixed;
+            overscroll-behavior: none;
+            touch-action: pan-y;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar,
+        *::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+        
         body {
             font-family: 'Quicksand', sans-serif;
             background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
             min-height: 100vh;
-            overflow-x: hidden;
             position: relative;
             display: flex;
             align-items: center;
@@ -41,6 +73,7 @@
             inset: 0;
             pointer-events: none;
             z-index: 1;
+            overflow: hidden;
         }
         .float-item {
             position: absolute;
@@ -108,6 +141,7 @@
             text-align: center;
             z-index: 10;
             position: relative;
+            overflow-x: hidden;
         }
         
         /* TITLE - BETTER FONT */
@@ -132,7 +166,7 @@
         
         /* QUESTION GIF */
         .question-gif {
-            width: 240px;
+            width: 280px;
             height: auto;
             margin: 0 auto 25px;
             border-radius: 22px;
@@ -184,6 +218,7 @@
             background: transparent;
             transition: all 0.35s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             filter: drop-shadow(0 15px 35px rgba(0,0,0,0.5));
+            touch-action: manipulation;
         }
         
         .flower-btn::before {
@@ -219,6 +254,11 @@
             filter: drop-shadow(0 25px 60px rgba(255,107,157,0.9));
         }
         
+        .yes-flower:active, .butterfly-btn:active {
+            transform: scale(1.2) rotate(10deg) !important;
+            filter: drop-shadow(0 20px 50px rgba(255,107,157,0.9));
+        }
+        
         /* NO FLOWER TOP RIGHT */
         .no-flower {
             width: 90px;
@@ -226,6 +266,7 @@
             position: fixed;
             top: 15px;
             right: 20px;
+            z-index: 100;
         }
         .no-flower::before { content: '🌼'; font-size: 85px; }
         .no-flower .flower-btn-text {
@@ -246,10 +287,15 @@
             color: white;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             transition: all 0.3s;
+            touch-action: manipulation;
         }
         .choice-btn:hover {
             transform: scale(1.15);
             box-shadow: 0 20px 45px rgba(255,107,157,0.7);
+        }
+        .choice-btn:active {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255,107,157,0.7);
         }
         
         /* LOVE COUNTER */
@@ -304,6 +350,7 @@
             border: 3px solid rgba(255,255,255,0.5);
             position: relative;
             overflow: hidden;
+            touch-action: manipulation;
         }
         .mystery-box::before {
             content: '?';
@@ -315,6 +362,10 @@
         .mystery-box:hover {
             transform: scale(1.12) rotate(3deg);
             box-shadow: 0 20px 50px rgba(255,107,157,0.7);
+        }
+        .mystery-box:active {
+            transform: scale(1.1) rotate(3deg);
+            box-shadow: 0 15px 45px rgba(255,107,157,0.7);
         }
         .mystery-box.selected {
             border: 5px solid #FFD700;
@@ -330,7 +381,7 @@
         .mystery-box.revealed::before {
             content: '';
         }
-        .mystery-box.revealed:hover {
+        .mystery-box.revealed:hover, .mystery-box.revealed:active {
             transform: scale(1);
         }
         .box-content {
@@ -360,7 +411,7 @@
         .necklace-reveal {
             animation: revealBounce 1s ease-out;
             margin: 30px 0;
-            font-size: 150px;
+            font-size: 180px;
         }
         @keyframes revealBounce {
             0% { transform: scale(0) rotate(-180deg); opacity: 0; }
@@ -370,14 +421,37 @@
         
         .hidden { display: none !important; }
         
+        /* MOBILE SPECIFIC */
         @media (max-width: 480px) {
-            h1 { font-size: 3.5em; }
-            h2 { font-size: 1.6em; }
+            h1 { font-size: 2.8em; }
+            h2 { font-size: 1.4em; }
             .question-gif { width: 200px; }
-            .choice-btn { padding: 15px 28px; font-size: 1.1em; }
-            .mystery-box { width: 110px; height: 110px; margin: 10px; }
-            .love-letter { font-size: 1.1em; padding: 20px; }
-            .box-content { font-size: 55px; }
+            .choice-btn { padding: 13px 25px; font-size: 1em; }
+            .mystery-box { width: 95px; height: 95px; margin: 8px; }
+            .mystery-box::before { font-size: 60px; }
+            .box-content { font-size: 48px; }
+            .love-letter { font-size: 1em; padding: 18px; }
+            .love-counter { font-size: 2.2em; }
+            .message-text { font-size: 1.2em; }
+            .necklace-reveal { font-size: 120px; }
+            .flower-btn { width: 85px; height: 85px; }
+            .flower-btn::before { font-size: 75px; }
+            .flower-btn-text { font-size: 0.9em; }
+            .no-flower { width: 75px; height: 75px; top: 10px; right: 10px; }
+            .no-flower::before { font-size: 70px; }
+            .size-small { font-size: 20px !important; }
+            .size-medium { font-size: 32px !important; }
+            .size-large { font-size: 44px !important; }
+            .gif-small { width: 40px !important; height: 40px !important; }
+            .gif-medium { width: 60px !important; height: 60px !important; }
+            .gif-large { width: 85px !important; height: 85px !important; }
+        }
+        
+        @media (max-width: 360px) {
+            h1 { font-size: 2.5em; }
+            .mystery-box { width: 85px; height: 85px; }
+            .choice-btn { padding: 12px 22px; font-size: 0.95em; }
+            .question-gif { width: 180px; }
         }
     </style>
 </head>
@@ -477,11 +551,10 @@
             </div>
         </div>
 
-        <!-- Q7: NECKLACE REVEAL -->
+        <!-- Q7: GIFT REVEAL -->
         <div class="question-section hidden" id="q7">
             <div class="necklace-reveal">📿✨</div>
-            <h2>It's a necklace! 💎</h2>
-            <p class="message-text">Do you like it baby? 💕</p>
+            <h2>Do you like the gift baby? 💕</h2>
             <button class="flower-btn butterfly-btn" onclick="likeNecklace()">
                 <span class="flower-btn-text">YES!</span>
             </button>
@@ -507,9 +580,9 @@
         <!-- FINAL: LOVE LETTER -->
         <div class="question-section hidden" id="final">
             <img src="https://media1.tenor.com/m/53jaNOrVEhgAAAAC/woah-surprised.gif" class="question-gif">
-            <h2 style="font-size: 3em;">I LOVE YOU BABY! 💍</h2>
+            <h2 style="font-size: 3em;">I LOVE YOU BABY</h2>
             <div class="love-letter">
-                Every moment with you feels like a dream I never want to wake up from. You are the smile that makes my heart skip a beat, and the love that completes my soul.<br><br>
+                Every moment with you feels like a dream I never want to wake up from. You are the light that brightens my darkest days, the smile that makes my heart skip a beat, and the love that completes my soul.<br><br>
                 I cherish every laugh we share, every conversation we have, and every memory we create together. You make me want to be a better person, and loving you is the easiest and most beautiful thing I've ever done.<br><br>
                 I promise to hold your hand through every adventure, to wipe away your tears, to celebrate your victories, and to love you more with each passing day.<br><br>
                 You are my forever, my always, my everything.<br><br>
@@ -519,6 +592,55 @@
     </div>
 
     <script>
+        // PREVENT SWIPE NAVIGATION & PULL-TO-REFRESH
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: false });
+        
+        document.addEventListener('touchmove', function(e) {
+            const touchEndX = e.touches[0].clientX;
+            const touchEndY = e.touches[0].clientY;
+            const deltaX = Math.abs(touchEndX - touchStartX);
+            const deltaY = Math.abs(touchEndY - touchStartY);
+            
+            // Prevent horizontal swipes
+            if (deltaX > deltaY && deltaX > 50) {
+                e.preventDefault();
+            }
+            
+            // Prevent pull-to-refresh
+            if (touchStartY < 50 && touchEndY > touchStartY) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+        
+        // Prevent default swipe behaviors
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        });
+        
+        document.addEventListener('gesturechange', function(e) {
+            e.preventDefault();
+        });
+        
+        document.addEventListener('gestureend', function(e) {
+            e.preventDefault();
+        });
+        
+        // Prevent double-tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        
         const GIFS = [
             'https://media1.tenor.com/m/Fy9zovre5VAAAAAC/bubu-dudu-kisses.gif',
             'https://media.tenor.com/KDqnVi_7tZoAAAAj/panda-love.gif',
@@ -652,18 +774,15 @@
         
         // Q6: SELECT BOX - SELECTED BOX IS ALWAYS NECKLACE
         function selectBox(index) {
-            if(selectedBox !== -1) return; // Already selected
+            if(selectedBox !== -1) return;
             
-            // Select box
             selectedBox = index;
             document.getElementById('box' + index).classList.add('selected');
             
-            // Disable clicking other boxes
             document.querySelectorAll('.mystery-box').forEach(box => {
                 box.style.pointerEvents = 'none';
             });
             
-            // Show confirmation
             document.getElementById('confirmSection').classList.remove('hidden');
         }
         
@@ -671,28 +790,22 @@
         function revealGift() {
             kissExplosion();
             
-            // Hide confirmation
             document.getElementById('confirmSection').classList.add('hidden');
             
-            // The selected box becomes necklace
             document.getElementById('box' + selectedBox).classList.add('revealed');
             document.getElementById('emoji' + selectedBox).textContent = '📿';
             document.getElementById('label' + selectedBox).textContent = 'Necklace';
             
-            // The other two boxes become flowers and chocolate
             const otherBoxes = [0, 1, 2].filter(i => i !== selectedBox);
             
-            // First other box = flowers
             document.getElementById('box' + otherBoxes[0]).classList.add('revealed');
             document.getElementById('emoji' + otherBoxes[0]).textContent = '🌹';
             document.getElementById('label' + otherBoxes[0]).textContent = 'Flowers';
             
-            // Second other box = chocolate
             document.getElementById('box' + otherBoxes[1]).classList.add('revealed');
             document.getElementById('emoji' + otherBoxes[1]).textContent = '🍫';
             document.getElementById('label' + otherBoxes[1]).textContent = 'Chocolate';
             
-            // Show "What you missed" section
             document.getElementById('missedSection').classList.remove('hidden');
         }
         
